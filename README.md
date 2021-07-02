@@ -7,6 +7,17 @@ and OSX, so that if you have an ability to test the library on other platforms, 
 
 *Please, feel free to send me bug reports and fixes. Many thanks to all contributors.*
 
+## What is this fork for?
+
+Unfortunately original library doesn't allow reborn from within child process. This feature can be used to 
+restart the process from within itself. This small changes allow to perform something like this to restart 
+daemon. Note the `_GO_DAEMON=0` variable set to zero. This makes library follow parent control flow.
+
+```go
+var cmd = exec.Command("bash", "-c", fmt.Sprintf("sleep 0.5s; _GO_DAEMON=0 %s start", appFilename()))
+var err = cmd.Start()
+```
+
 ## Features
 
 * Goroutine-safe daemonization;
