@@ -180,10 +180,15 @@ func (d *Context) prepareEnv() (err error) {
 
 	mark := fmt.Sprintf("%s=%s", MARK_NAME, MARK_VALUE)
 	if len(d.Env) == 0 {
-		d.Env = os.Environ()
+		var tmp = os.Environ()
+		var unmark = fmt.Sprintf("%s=0", MARK_NAME)
+		for _, v := range tmp {
+			if v != unmark {
+				d.Env = append(d.Env, v)
+			}
+		}
 	}
 	d.Env = append(d.Env, mark)
-
 	return
 }
 

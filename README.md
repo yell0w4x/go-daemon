@@ -7,6 +7,19 @@ and OSX, so that if you have an ability to test the library on other platforms, 
 
 *Please, feel free to send me bug reports and fixes. Many thanks to all contributors.*
 
+## What is this fork for?
+
+Unfortunately original library doesn't allow reborn from within child process. This feature can be used to 
+restart the process from within itself. This small changes allow to perform something like this to restart 
+daemon. Note the `_GO_DAEMON=0` variable set to zero. This makes library follow parent control flow.
+
+```go
+var cmd = exec.Command("bash", "-c", fmt.Sprintf("sleep 0.5s; _GO_DAEMON=0 %s start", appFilename()))
+var err = cmd.Start()
+```
+
+The changes introduced in v0.1.6 tag branched from orginal v0.1.5.
+
 ## Features
 
 * Goroutine-safe daemonization;
@@ -16,11 +29,11 @@ and OSX, so that if you have an ability to test the library on other platforms, 
 
 ## Installation
 
-	go get github.com/sevlyar/go-daemon
+	go get github.com/yell0w4x/go-daemon@v0.1.6
 
 You can use [gopkg.in](http://labix.org/gopkg.in):
 
-	go get gopkg.in/sevlyar/go-daemon.v0
+	go get gopkg.in/yell0w4x/go-daemon.v0
 
 If you want to use the library in production project, please use vendoring,
 because i can not ensure backward compatibility before release v1.0.
