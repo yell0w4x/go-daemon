@@ -18,6 +18,8 @@ var cmd = exec.Command("bash", "-c", fmt.Sprintf("sleep 0.5s; _GO_DAEMON=0 %s st
 var err = cmd.Start()
 ```
 
+The changes introduced in v0.1.6 tag branched from orginal v0.1.5.
+
 ## Features
 
 * Goroutine-safe daemonization;
@@ -27,11 +29,11 @@ var err = cmd.Start()
 
 ## Installation
 
-	go get github.com/sevlyar/go-daemon
+	go get github.com/yell0w4x/go-daemon
 
 You can use [gopkg.in](http://labix.org/gopkg.in):
 
-	go get gopkg.in/sevlyar/go-daemon.v0
+	go get gopkg.in/yell0w4x/go-daemon.v0
 
 If you want to use the library in production project, please use vendoring,
 because i can not ensure backward compatibility before release v1.0.
